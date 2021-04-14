@@ -14,9 +14,15 @@
 // In this step we will capture the command line  information supplied by the user.
 
 // We will store each piece of information in a dedicated variable for later use.
+// node currency.js 50 cad(from) usd(to)
+// Get the arguments
+const arguments = process.argv.slice(2) 
+//Extract value(s) from arguments array
+const amount = arguments[0] 
+const fromCurr = arguments[1]
+const toCurr = arguments[2]
 
-
-
+console.log(`Amount: ${amount}, From: ${fromCurr}, To: ${toCurr}`)
 // --------------------------------------------------
 // Step 2: Validate user input
 // --------------------------------------------------
