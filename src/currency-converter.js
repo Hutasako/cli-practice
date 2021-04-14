@@ -30,8 +30,15 @@ console.log(`Amount: ${amount}, From: ${fromCurr}, To: ${toCurr}`)
 
 // If any of the required information is missing, display a meaningful message
 // and exit the program.
-
-
+if(!amount){
+    return console.error(`Please provide an amount to convert.`)
+} 
+if(!fromCurr){
+    return console.error(`Please provide a currency to convert from.`)
+} 
+if(!toCurr){
+    return console.error(`Please provide an currency to convert to.`)
+} 
 
 // --------------------------------------------------
 // Step 3: Define currency conversion rates
