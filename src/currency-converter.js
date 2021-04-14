@@ -18,7 +18,7 @@
 // Get the arguments
 const arguments = process.argv.slice(2) 
 //Extract value(s) from arguments array
-const amount = arguments[0] 
+const amount = parseInt(arguments[0]) // Convert arg to Int
 const fromCurr = arguments[1]
 const toCurr = arguments[2]
 
@@ -31,14 +31,15 @@ console.log(`Amount: ${amount}, From: ${fromCurr}, To: ${toCurr}`)
 // If any of the required information is missing, display a meaningful message
 // and exit the program.
 if(!amount){
-    return console.error(`Please provide an amount to convert.`)
+    return console.error(`Please provide an amount to convert. Recevied ${amount}`)
 } 
 if(!fromCurr){
     return console.error(`Please provide a currency to convert from.`)
 } 
 if(!toCurr){
-    return console.error(`Please provide an currency to convert to.`)
+    return console.error(`Please provide a currency to convert to.`)
 } 
+
 
 // --------------------------------------------------
 // Step 3: Define currency conversion rates
@@ -52,6 +53,16 @@ if(!toCurr){
 // The conversion rates do not have to be accurate, athough this resource contains
 // up-to-date rate information: https://www.xe.com/
 
+const rates = {
+    // From
+    'USD': {
+        // To
+        'CAD': 1.25
+    },
+    'CAD': {
+        'USD': 0.8
+    },
+}
 
 
 // --------------------------------------------------
@@ -63,6 +74,11 @@ if(!toCurr){
 // If the user supplies an invalid initial or target currency, display a meaningful
 // warning message and exit the program.
 
+if(!(fromCurr in rates) || !(toCurr in rates)){
+    return console.error(`Please provide a valid currency. Accepted currencies: ${Object.keys(rates)}`)
+}
+const toCurrRate = rates[fromCurr][toCurr]
+console.log(`Current rates for ${fromCurr} TO ${toCurr}: ${toCurrRate}`)
 
 
 // --------------------------------------------------
@@ -73,7 +89,7 @@ if(!toCurr){
 
 // Now we will compute the rate, apply it to the amount, and capture the result.
 
-
+console.log(`Your converted amount is ${amount*toCurrRate} ${toCurr}`)
 
 // --------------------------------------------------
 // Step 6: Display results
